@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docs
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: docs
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: docs
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: docs
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+          - name: DOCS_PATH
+            value: /tmp/docs
+          - name: DB_HOST
+            value: "{{ .Values.mysql.host }}"
+          - name: DB_USER
+            value: "{{ .Values.mysql.user }}"
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: files-secrets
+                key: mysqlpass
+          - name: KAFKA_HOST
+            value: "{{ .Values.kafka.host }}"
+          - name: KAFKA_PORT
+            value: "{{ .Values.kafka.port }}"
+          - name: ZOOKEEPER_HOST
+            value: "{{ .Values.zookeeper.host }}"
+          - name: ZOOKEEPER_PORT
+            value: "{{ .Values.zookeeper.port }}"
+        ports:
+          - containerPort: {{ .Values.service.port }}
+        volumeMounts:
+          - mountPath: /tmp/docs
+            name: docs-claim
+      volumes:
+        - name: docs-claim
+          persistentVolumeClaim:
+            claimName: docs-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: docs-claim
+  name: docs-claim
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docs-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: docs
+    release: {{ .Release.Name }}   
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: docs
+  ports:
+  - name: docs-port
+    port: {{ .Values.service.port }}
