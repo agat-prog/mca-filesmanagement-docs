@@ -3,6 +3,7 @@ pipeline {
     environment {
         NAMESPACE = "${env.BRANCH_NAME == "main" ? "tfm-prod-agat-prog" : "tfm-pre-agat-prog"}"
         MYSQL_HOST = "${env.BRANCH_NAME == "main" ? "mysql-service.tfm-prod-svc-agat-prog.svc.cluster.local" : "mysql-service.tfm-pre-svc-agat-prog.svc.cluster.local"}"
+        ZOOKEEPER_HOST = "${env.BRANCH_NAME == "main" ? "zookeeper.tfm-prod-svc-agat-prog.svc.cluster.local" : "zookeeper.tfm-pre-svc-agat-prog.svc.cluster.local"}"
         DEPLOY = "${env.BRANCH_NAME == "main" || env.BRANCH_NAME == "develop" ? "true" : "false"}"
         BUILD = "${env.BRANCH_NAME == "develop" || env.BRANCH_NAME.startsWith("release") || env.BRANCH_NAME == "main" ? "true" : "false"}"
         REGISTRY = 'agatalba/tfm-mca-filemanagement-docs'
@@ -58,7 +59,7 @@ pipeline {
                 }
             }  
             steps {
-                sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='${pomVersion}' --set mysql.host=${MYSQL_HOST}  docs-release helm/"
+                sh "helm upgrade -n ${NAMESPACE} -f helm/values.yaml --set namespace=${NAMESPACE} --set image.tag='${pomVersion}' --set mysql.host=${MYSQL_HOST} --set zookeeper.host=${ZOOKEEPER_HOST} docs-release helm/"
             }
         }              
     }
