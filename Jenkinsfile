@@ -36,7 +36,7 @@ pipeline {
                 echo "BUILD -- ${BUILD}"
                 echo "DEPLOY -- ${DEPLOY}" 
                 echo "version -- ${pomVersion}"    
-                sh "mvn clean test install"                
+                sh "mvn clean test"                
             }
         }
         stage('Deploy dependencies') {
