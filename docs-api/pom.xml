@@ -7,7 +7,8 @@
 	<parent>
 		<groupId>docs</groupId>
 		<artifactId>docs</artifactId>
-		<version>1.0.4-SNAPSHOT</version>
+		<version>1.0.5-SNAPSHOT</version>
+		<relativePath />
 	</parent>
 
 	<properties>
@@ -26,9 +27,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>mca.filesmanagement</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>docs-api-messaging</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 
 		<dependency>

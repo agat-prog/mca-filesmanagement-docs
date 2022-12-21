@@ -39,6 +39,11 @@ pipeline {
                 sh "mvn clean test install"                
             }
         }
+        stage('Deploy dependencies') {
+            steps {    
+                sh "mvn deploy -DskipTests"                
+            }
+        }        
         stage('Build image') {
             when {
                 environment name: 'BUILD', value: 'true'
