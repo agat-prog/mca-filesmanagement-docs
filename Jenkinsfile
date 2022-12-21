@@ -41,7 +41,10 @@ pipeline {
         }
         stage('Deploy dependencies') {
             steps {    
-                sh "mvn deploy -DskipTests"                
+			    configFileProvider(
+			        [configFile(fileId: 'docs-maven-settings', variable: 'MAVEN_SETTINGS')]) {
+			        sh 'mvn -s $MAVEN_SETTINGS deploy -DskipTests'
+			    }            
             }
         }        
         stage('Build image') {
