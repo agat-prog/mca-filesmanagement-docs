@@ -36,9 +36,17 @@ pipeline {
                 echo "BUILD -- ${BUILD}"
                 echo "DEPLOY -- ${DEPLOY}" 
                 echo "version -- ${pomVersion}"    
-                sh "mvn clean test install"                
+                sh "mvn clean test"                
             }
         }
+        stage('Deploy dependencies') {
+            steps {    
+			    configFileProvider(
+			        [configFile(fileId: 'docs-maven-settings', variable: 'MAVEN_SETTINGS')]) {
+			        sh 'mvn -s $MAVEN_SETTINGS deploy -DskipTests'
+			    }            
+            }
+        }        
         stage('Build image') {
             when {
                 environment name: 'BUILD', value: 'true'

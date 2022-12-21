@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>docs</groupId>
 	<artifactId>docs</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.5</version>
 	<packaging>pom</packaging>
 
 	<name>docs-root-project</name>
 	<description>Docs root project</description>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.0</version>
 		<relativePath />
-	</parent>	
+	</parent>
+
+	<distributionManagement>
+		<repository>
+			<id>release-artifacts-repository</id>
+			<name>Artifactory para dependencias Release</name>
+			<url>http://artifactory:8081/artifactory/libs-release/</url>
+			<layout>default</layout>
+		</repository>
+		<snapshotRepository>
+			<id>snapshot-artifacts-repository</id>
+			<name>Artifactory para dependencias snapshot</name>
+			<url>http://artifactory:8081/artifactory/libs-snapshot/</url>
+			<layout>default</layout>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<modules>
-		<module>docs-api</module>
 		<module>docs-api-messaging</module>
+		<module>docs-api</module>
 	</modules>
 </project>
