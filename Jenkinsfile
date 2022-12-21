@@ -40,6 +40,9 @@ pipeline {
             }
         }
         stage('Deploy dependencies') {
+            when {
+                environment name: 'BUILD', value: 'true'
+            }        
             steps {    
 			    configFileProvider(
 			        [configFile(fileId: 'docs-maven-settings', variable: 'MAVEN_SETTINGS')]) {
