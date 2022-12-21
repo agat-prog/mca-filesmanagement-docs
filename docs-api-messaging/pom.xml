@@ -6,7 +6,6 @@
 		<groupId>docs</groupId>
 		<artifactId>docs</artifactId>
 		<version>1.0.5-SNAPSHOT</version>
-		<relativePath />
 	</parent>	
 
 	<properties>
