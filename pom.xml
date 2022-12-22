@@ -16,6 +16,21 @@
 		<version>2.6.0</version>
 		<relativePath />
 	</parent>
+	
+	<scm>
+		<developerConnection>scm:git:https://github.com/agat-prog/mca-filesmanagement-docs.git</developerConnection>
+		<tag>0.0.1</tag>
+	</scm>	
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<checkstyle-maven-plugin.version>3.2.0</checkstyle-maven-plugin.version>
+		<checkstyle.version>9.2.1</checkstyle.version>
+		<project.scm.id>github-server-oauth2</project.scm.id>		
+	</properties>	
 
 	<distributionManagement>
 		<repository>

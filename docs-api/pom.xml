@@ -11,12 +11,7 @@
 	</parent>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>17</java.version>
-		<checkstyle-maven-plugin.version>3.2.0</checkstyle-maven-plugin.version>
-		<checkstyle.version>9.2.1</checkstyle.version>
 		<flyway.version>7.15.0</flyway.version>
-		<project.scm.id>github-server-oauth2</project.scm.id>
 	</properties>
 
 	<scm>
