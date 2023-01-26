@@ -17,12 +17,23 @@ import mca.filesmanagement.docs.service.DocCommandHandler;
 @EnableAutoConfiguration
 @EnableJpaRepositories
 public class DocSagaConfig {
-	
+
+	/**
+	 * Devuelve el command handler necesario para vincular el micro con una SAGA.
+	 * @param documentUseCase
+	 * @return Manejador de comandos para el patrón SAGA.
+	 */
 	@Bean
 	public DocCommandHandler bpmCommandHandler(IDocumentUseCase documentUseCase) {
 		return new DocCommandHandler(documentUseCase);
 	}
 
+	/**
+	 * Devuelve la asociación existente entre el nombre del "topic" y la definición de la SAGA asociada.
+	 * @param target
+	 * @param sagaCommandDispatcherFactory
+	 * @return Objeto de Eventuate que define los pasos de una SAGA.
+	 */
 	@Bean
 	public CommandDispatcher consumerCommandDispatcher(DocCommandHandler target,
 			SagaCommandDispatcherFactory sagaCommandDispatcherFactory) {

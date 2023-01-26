@@ -16,12 +16,12 @@
 		<version>2.6.0</version>
 		<relativePath />
 	</parent>
-	
+
 	<scm>
 		<developerConnection>scm:git:https://github.com/agat-prog/mca-filesmanagement-docs.git</developerConnection>
 		<tag>0.0.1</tag>
-	</scm>	
-	
+	</scm>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
@@ -29,8 +29,8 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<checkstyle-maven-plugin.version>3.2.0</checkstyle-maven-plugin.version>
 		<checkstyle.version>9.2.1</checkstyle.version>
-		<project.scm.id>github-server-oauth2</project.scm.id>		
-	</properties>	
+		<project.scm.id>github-server-oauth2</project.scm.id>
+	</properties>
 
 	<distributionManagement>
 		<repository>
@@ -51,4 +51,80 @@
 		<module>docs-api-messaging</module>
 		<module>docs-api</module>
 	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>${checkstyle-maven-plugin.version}</version>
+					<configuration>
+						<violationSeverity>error</violationSeverity>
+						<configLocation>/checkstyle/checkstyle.xml</configLocation>
+						<sourceDirectories>
+							<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+						</sourceDirectories>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>3.19.0</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.8.8</version>
+
+					<executions>
+						<execution>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>jacoco-report</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>jacoco-check</id>
+							<goals>
+								<goal>check</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<rule>
+										<element>PACKAGE</element>
+										<excludes>
+											<exclude>mca.filesmanagement.oauth2.config</exclude>
+										</excludes>
+										<limits>
+											<limit>
+												<counter>LINE</counter>
+												<value>COVEREDRATIO</value>
+												<minimum>0.75</minimum>
+											</limit>
+										</limits>
+									</rule>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

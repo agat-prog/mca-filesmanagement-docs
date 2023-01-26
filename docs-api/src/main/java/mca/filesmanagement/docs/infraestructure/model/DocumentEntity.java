@@ -19,22 +19,22 @@ public class DocumentEntity {
 	@Column (name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column (name = "CODE", nullable = false, updatable = false)
 	private String code;
-	
+
 	@Column (name = "NAME", nullable = false, updatable = false)
 	private String name;
-	
+
 	@Column (name = "ACTIVE")
 	private boolean active;
-	
+
 	@Column (name = "CREATION_USER", nullable = false, updatable = false)
 	private String creationUser;
-	
+
 	@Column (name = "UPDATE_USER", nullable = false)
 	private String updateUser;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column (name = "CREATION_DATE", nullable = false, updatable = false)
 	private Date creationDate;
@@ -42,10 +42,11 @@ public class DocumentEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column (name = "UPDATE_DATE", nullable = false)
 	private Date updateDate;
-	
+
 	@Column (name = "URL", nullable = true)
 	private String url;
-	
+
+	/** Constructor por defecto. */
 	public DocumentEntity() {
 		super();
 	}
