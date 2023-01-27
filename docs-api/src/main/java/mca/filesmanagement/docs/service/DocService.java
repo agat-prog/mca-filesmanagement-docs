@@ -25,7 +25,7 @@ public class DocService {
 	/**
 	 * Devuelve un documento creado en el sistema o NULL en caso contrario.
 	 * @param uuid Identificador único externo.
-	 * @return Documento
+	 * @return Documento.
 	 */
 	public DocumentDto findByCode(String uuid) {
 		return this.documentUseCase.findByCode(uuid);

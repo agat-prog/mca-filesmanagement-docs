@@ -115,4 +115,21 @@ public class DocumentUseCaseTest {
 		assertThrows(DocumentCreationException.class,
 				() -> this.documentUseCase.createDocument(DocsFactory.createNewDoc(2)));
 	}
+	
+
+	@Test
+	@DisplayName("Test delete document by code")
+	public void givenAExistingDocIdWhenDeleteThenOK() {
+		long id = 1;
+		DocumentDto documentDto = DocsFactory.createDoc(id);
+		documentDto.setUrl("URL");
+		when(this.documentRepository.getByCode(any())).thenReturn(documentDto);
+
+		doNothing().when(this.documentRepository).deleteById(Mockito.anyLong());
+		doNothing().when(this.documentBinaryRepositorio).delete(Mockito.anyString());
+		
+		this.documentUseCase.deleteByCode(String.format(DocsFactory.NAME_FORMAT, id));
+		verify(this.documentRepository, times(1)).deleteById(Mockito.anyLong());
+		verify(this.documentBinaryRepositorio, times(1)).delete(Mockito.anyString());
+	}
 }

@@ -1,4 +1,4 @@
-package mca.filesmanagement.docs;
+package mca.filesmanagement.docs.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
