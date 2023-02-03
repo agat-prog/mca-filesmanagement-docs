@@ -39,6 +39,21 @@ pipeline {
                 sh "mvn clean test"                
             }
         }
+        stage('Checkstyle') {
+            steps {
+                sh "mvn checkstyle:check"                
+            }
+        }   
+        stage('PMD') {
+            steps {
+                sh "mvn pmd:check"                
+            }
+        }         
+        stage('Coverage check') {
+            steps {
+                sh "mvn verify"                
+            }
+        }           
         stage('Deploy dependencies') {
             when {
                 environment name: 'BUILD', value: 'true'
@@ -55,8 +70,10 @@ pipeline {
                 environment name: 'BUILD', value: 'true'
             }
             steps {
-            	echo "version -- ${REGISTRY}" 
-                sh "mvn -f docs-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=agatalba -Djib.to.auth.password=agat1978#"                
+            	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
+            		echo "version -- ${REGISTRY}" 
+                	sh "mvn -f docs-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=${user} -Djib.to.auth.password=${pass}"                
+            	}
             }
         }  
         stage('Deploy into Kubernetes') {

@@ -3,10 +3,11 @@ package docs.api.messaging.replies;
 import java.util.UUID;
 
 public class DocCreatedEvent {
-	
+
 	private UUID uuid;
 	private String state;
 
+	/** Constructor por defecto. */
 	public DocCreatedEvent() {
 		super();
 	}

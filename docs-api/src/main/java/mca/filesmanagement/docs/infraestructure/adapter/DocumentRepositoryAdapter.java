@@ -20,14 +20,18 @@ public class DocumentRepositoryAdapter implements IDocumentRepository{
 
 	@Autowired
 	private JpaDocumentRepository jpaDocumentRepository;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
+	/** Constructor por defecto. */
 	public DocumentRepositoryAdapter() {
 		super();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	@Transactional
 	public long createDocument(DocumentNewDto documentDto) {
@@ -43,26 +47,38 @@ public class DocumentRepositoryAdapter implements IDocumentRepository{
 		return entity.getId();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	@Transactional
 	public DocumentDto getById(long id) {
 		return this.modelMapper.map(jpaDocumentRepository.findById(id).orElseThrow(), DocumentDto.class);
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	@Transactional
 	public DocumentDto getByCode(String code) {
 		return this.modelMapper.map(jpaDocumentRepository.findByCode(code), DocumentDto.class);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	@Transactional
-	public void active(long id, String URL) {
-		this.jpaDocumentRepository.activeDocument(id, URL);
+	public void active(long id, String url) {
+		this.jpaDocumentRepository.activeDocument(id, url);
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	@Transactional	
+	@Transactional
 	public void deleteById(long id) {
 		this.jpaDocumentRepository.deleteById(id);
 	}

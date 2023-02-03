@@ -3,11 +3,12 @@ package docs.api.messaging.commands;
 import io.eventuate.tram.commands.common.Command;
 
 public class CreateDocCommand implements Command {
-	
+
 	private String name;
 	private String contentBase64;
 	private String user;
-	
+
+	/** Constructor por defecto. */
 	public CreateDocCommand() {
 		super();
 	}

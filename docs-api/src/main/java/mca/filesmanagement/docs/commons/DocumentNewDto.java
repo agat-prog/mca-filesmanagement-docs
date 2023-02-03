@@ -1,11 +1,12 @@
 package mca.filesmanagement.docs.commons;
 
 public class DocumentNewDto {
-	
+
 	private String name;
 	private String contentBase64;
 	private String creationUser;
-	
+
+	/** Constructor por defecto. */
 	public DocumentNewDto() {
 		super();
 	}
@@ -51,5 +52,4 @@ public class DocumentNewDto {
 	public void setCreationUser(String creationUser) {
 		this.creationUser = creationUser;
 	}
-	
 }

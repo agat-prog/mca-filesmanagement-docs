@@ -3,7 +3,7 @@ package mca.filesmanagement.docs.commons;
 import java.util.Date;
 
 public class DocumentDto {
-	
+
 	private Long id;
 	private String code;
 	private boolean active;
@@ -14,11 +14,16 @@ public class DocumentDto {
 	private String updateUser;
 	private Date updateDate;
 	private String url;
-	
+
+	/** Constructor por defecto. */
 	public DocumentDto() {
 		super();
 	}
-	
+
+	/**
+	 * Constructor con el atributo "code" inicializado.
+	 * @param code
+	 */
 	public DocumentDto(String code) {
 		super();
 		this.code = code;
@@ -60,7 +65,7 @@ public class DocumentDto {
 	}
 
 	/**
-	 * @param uuid the code to set
+	 * @param code the code to set
 	 */
 	public void setCode(String code) {
 		this.code = code;
