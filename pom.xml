@@ -4,7 +4,7 @@
 
 	<groupId>docs</groupId>
 	<artifactId>docs</artifactId>
-	<version>1.0.8-SNAPSHOT</version>
+	<version>1.0.9</version>
 	<packaging>pom</packaging>
 
 	<name>docs-root-project</name>
