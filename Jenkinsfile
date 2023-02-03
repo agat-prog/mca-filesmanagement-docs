@@ -72,7 +72,7 @@ pipeline {
             steps {
             	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
             		echo "version -- ${REGISTRY}" 
-                	sh "mvn -f docs-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=${user} -Djib.to.auth.password=${pass}"                
+                	sh "mvn -f docs-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=agatalba -Djib.to.auth.password=agat1978#"                
             	}
             }
         }  
