@@ -1,12 +1,12 @@
 package mca.filesmanagement.docs;
 
 import java.util.Date;
-import java.util.UUID;
 
 import org.springframework.util.Base64Utils;
 
 import mca.filesmanagement.docs.commons.DocumentDto;
 import mca.filesmanagement.docs.commons.DocumentNewDto;
+import mca.filesmanagement.docs.infraestructure.model.DocumentEntity;
 
 public class DocsFactory {
 
@@ -37,8 +37,15 @@ public class DocsFactory {
 		return doc;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(UUID.randomUUID().toString());
+	public static DocumentEntity createDocEntity(long id) {
+		DocumentEntity doc = new DocumentEntity();
+		doc.setActive(true);
+		doc.setCode(generateCode(id));
+		doc.setCreationDate(new Date());
+		doc.setId(id);
+		doc.setName(String.format(NAME_FORMAT, id));
+		doc.setUpdateDate(new Date());
+		return doc;
 	}
 	
 	public static String generateCode(long id) {

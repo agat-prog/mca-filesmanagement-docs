@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 	<artifactId>docs-api</artifactId>
 	<packaging>jar</packaging>
 	<description>Microservicio para la gestión de documentos</description>
@@ -55,32 +55,32 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>io.eventuate.tram.core</groupId>
-		    <artifactId>eventuate-tram-spring-commands</artifactId>
-		    <version>0.29.0.RELEASE</version>
+			<groupId>io.eventuate.tram.core</groupId>
+			<artifactId>eventuate-tram-spring-commands</artifactId>
+			<version>0.29.0.RELEASE</version>
 		</dependency>
 
 		<dependency>
-		    <groupId>io.eventuate.tram.core</groupId>
-		    <artifactId>eventuate-tram-spring-optimistic-locking</artifactId>
-		    <version>0.29.0.RELEASE</version>
+			<groupId>io.eventuate.tram.core</groupId>
+			<artifactId>eventuate-tram-spring-optimistic-locking</artifactId>
+			<version>0.29.0.RELEASE</version>
 		</dependency>
 
 		<dependency>
-		    <groupId>io.eventuate.tram.core</groupId>
-		    <artifactId>eventuate-tram-spring-jdbc-kafka</artifactId>
-		    <version>0.29.0.RELEASE</version>
+			<groupId>io.eventuate.tram.core</groupId>
+			<artifactId>eventuate-tram-spring-jdbc-kafka</artifactId>
+			<version>0.29.0.RELEASE</version>
 		</dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
 
 		<dependency>
-		    <groupId>org.modelmapper</groupId>
-		    <artifactId>modelmapper</artifactId>
-		    <version>3.1.0</version>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 
 		<!-- Flyway -->
@@ -95,6 +95,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.beanrunner</groupId>
+			<artifactId>beanrunner</artifactId>
+			<scope>test</scope>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
@@ -113,26 +120,56 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle-maven-plugin.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.puppycrawl.tools</groupId>
-						<artifactId>checkstyle</artifactId>
-						<version>${checkstyle.version}</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<violationSeverity>error</violationSeverity>
-					<configLocation>google_checks.xml</configLocation>
-					<sourceDirectories>
-						<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-					</sourceDirectories>
-				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<!-- Add this checking -->
+					<execution>
+						<id>jacoco-check</id>
+						<goals>
 							<goal>check</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<exclude>mca/filesmanagement/docs/service/DocCommandHandler.class</exclude>
+							</excludes>
+							<rules>
+								<rule>
+									<element>PACKAGE</element>
+									<excludes>
+										<exclude>mca.filesmanagement.docs</exclude>
+										<exclude>mca.filesmanagement.docs.config</exclude>
+									</excludes>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.9</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
