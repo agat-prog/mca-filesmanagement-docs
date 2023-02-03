@@ -44,16 +44,6 @@ pipeline {
                 sh "mvn checkstyle:check"                
             }
         }   
-        stage('PMD') {
-            steps {
-                sh "mvn pmd:check"                
-            }
-        }         
-        stage('Coverage check') {
-            steps {
-                sh "mvn verify"                
-            }
-        }           
         stage('Deploy dependencies') {
             when {
                 environment name: 'BUILD', value: 'true'
@@ -65,6 +55,16 @@ pipeline {
 			    }            
             }
         }        
+        stage('PMD') {
+            steps {
+                sh "mvn pmd:check"                
+            }
+        }         
+        stage('Coverage check') {
+            steps {
+                sh "mvn verify"                
+            }
+        }           
         stage('Build image') {
             when {
                 environment name: 'BUILD', value: 'true'
