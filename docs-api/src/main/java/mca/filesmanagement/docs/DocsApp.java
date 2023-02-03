@@ -8,9 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author agat
  */
 @SpringBootApplication
-public final class DocsApp {
-
-	private DocsApp() {}
+public class DocsApp {
 
 	/**
 	 * Entrada principal de la aplicación de documentos.
@@ -18,5 +16,11 @@ public final class DocsApp {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DocsApp.class, args);
+	}
+
+	/**
+	 * PostConstruct.
+	 */
+	public void postConstruct() {
 	}
 }
