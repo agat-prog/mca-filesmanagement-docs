@@ -21,11 +21,8 @@ public class DocsApp {
 	}
 
 	/**
-	 * Devuelve el mapeador de objetos a utilizar.
-	 * @return ModelMapper
+	 * PostConstruct.
 	 */
-	@Bean
-	public ModelMapper modelMapper() {
-	    return new ModelMapper();
+	public void postConstruct() {
 	}
 }

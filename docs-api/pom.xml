@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>docs</groupId>
 		<artifactId>docs</artifactId>
-		<version>1.0.9</version>
+    <version>1.0.11</version>
 	</parent>
 
 	<properties>
@@ -158,7 +158,6 @@
 									<element>PACKAGE</element>
 									<excludes>
 										<exclude>mca.filesmanagement.docs</exclude>
-										<exclude>mca.filesmanagement.docs.config</exclude>
 									</excludes>
 									<limits>
 										<limit>
