@@ -1,4 +1,4 @@
-package mca.filesmanagement.docs.config;
+package mca.filesmanagement.docs;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

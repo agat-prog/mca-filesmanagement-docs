@@ -158,7 +158,6 @@
 									<element>PACKAGE</element>
 									<excludes>
 										<exclude>mca.filesmanagement.docs</exclude>
-										<exclude>mca.filesmanagement.docs.config</exclude>
 									</excludes>
 									<limits>
 										<limit>
