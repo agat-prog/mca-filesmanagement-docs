@@ -36,11 +36,13 @@ public class DocsControllerTest {
 	@Mock
 	private DocService docService;
 
+	/***/
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 	}
 
+	/** Test find a existing document by code. */
 	@Test
 	@DisplayName("Test find a existing document by code")
 	public void givenAExistingDocumentWhenFindThenReturnDocumentDto() {
@@ -51,9 +53,9 @@ public class DocsControllerTest {
 
 		assertNotNull(response);
 		assertTrue(HttpStatus.OK.equals(response.getStatusCode()));
-		
+
 		verify(this.docService, times(1)).findByCode(anyString());
-		
+
 		DocumentDto doc = response.getBody();
 		assertNotNull(doc);
 		assertNotNull(doc.getId());
