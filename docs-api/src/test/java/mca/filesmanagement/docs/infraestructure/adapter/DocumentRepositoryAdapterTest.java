@@ -26,7 +26,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import mca.filesmanagement.docs.DocsFactory;
 import mca.filesmanagement.docs.commons.DocumentDto;
 import mca.filesmanagement.docs.commons.DocumentNewDto;
-import mca.filesmanagement.docs.infraestructure.adapter.DocumentRepositoryAdapter;
 import mca.filesmanagement.docs.infraestructure.repository.JpaDocumentRepository;
 
 @ExtendWith(SpringExtension.class)

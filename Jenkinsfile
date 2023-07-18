@@ -18,15 +18,6 @@ pipeline {
     }
     
     stages {
-        stage('Print environment') {
-            steps {
-                echo "env.BRANCH_NAME -- ${env.BRANCH_NAME}"
-                echo "NAMESPACE -- ${NAMESPACE}"
-                echo "REGISTRY -- ${REGISTRY}"
-                echo "BUILD -- ${BUILD}"
-                echo "DEPLOY -- ${DEPLOY}"
-            }
-        }    
         stage('Unit Test') {
             steps {
                 script {
@@ -45,9 +36,6 @@ pipeline {
             }
         }   
         stage('Deploy dependencies') {
-            when {
-                environment name: 'BUILD', value: 'true'
-            }        
             steps {    
 			    configFileProvider(
 			        [configFile(fileId: 'docs-maven-settings', variable: 'MAVEN_SETTINGS')]) {
@@ -72,7 +60,7 @@ pipeline {
             steps {
             	withCredentials([usernamePassword(credentialsId: 'dockerhub-user', passwordVariable: 'pass', usernameVariable: 'user')]) {
             		echo "version -- ${REGISTRY}" 
-                	sh "mvn -f docs-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=agatalba -Djib.to.auth.password=agat1978#"                
+                	sh "mvn -f docs-api/pom.xml compile com.google.cloud.tools:jib-maven-plugin:3.2.0:build -Dimage=${REGISTRY}:${pomVersion} -DskipTests -Djib.to.auth.username=${user} -Djib.to.auth.password=${pass}"                
             	}
             }
         }  

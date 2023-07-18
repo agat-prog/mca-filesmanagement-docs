@@ -12,7 +12,7 @@ public class DtoTest {
 		BeanRunner beanRunner = new BeanRunner();
 		beanRunner.addTestValue(DocumentDto.class, new DocumentDto());
 		beanRunner.testBean(new DocumentDto());
-		
+
 		beanRunner = new BeanRunner();
 		beanRunner.addTestValue(DocumentNewDto.class, new DocumentNewDto());
 		beanRunner.testBean(new DocumentNewDto());

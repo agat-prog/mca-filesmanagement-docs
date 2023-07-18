@@ -27,20 +27,22 @@ import mca.filesmanagement.docs.service.DocService;
 
 @ExtendWith(SpringExtension.class)
 @Tag("UnitTest")
-@DisplayName("Services tests")
+@DisplayName("Controller tests")
 public class DocsControllerTest {
-	
+
 	@InjectMocks
 	private DocsController docsController;
-	
+
 	@Mock
 	private DocService docService;
 
+	/***/
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 	}
-	
+
+	/** Test find a existing document by code. */
 	@Test
 	@DisplayName("Test find a existing document by code")
 	public void givenAExistingDocumentWhenFindThenReturnDocumentDto() {
@@ -48,12 +50,12 @@ public class DocsControllerTest {
 		when(this.docService.findByCode(any())).thenReturn(DocsFactory.createDoc(id));
 
 		ResponseEntity<DocumentDto> response = this.docsController.findByCode(String.format(DocsFactory.CODE_FORMAT, id));
-		
+
 		assertNotNull(response);
 		assertTrue(HttpStatus.OK.equals(response.getStatusCode()));
-		
+
 		verify(this.docService, times(1)).findByCode(anyString());
-		
+
 		DocumentDto doc = response.getBody();
 		assertNotNull(doc);
 		assertNotNull(doc.getId());
